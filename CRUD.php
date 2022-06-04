@@ -1,10 +1,12 @@
 <?php
+// INSERT INTO `notes` (`sno`, `title`, `description`, `timestamp`) VALUES (NULL, 'testttt', 'tessssrt vsvsadvfcsd sdfcs d sdv', current_timestamp());
+
 // Connect to the database
 
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "dbabhishek";
+$database = "notes";
 
 // Create a connection
 $conn = mysqli_connect($servername, $username, $password, $database);
@@ -13,10 +15,6 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn){
     die("Sorry, we failed to connect: ". mysqli_connect_error());
 }
-else {
-    echo "Connection was successful<br>";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -121,6 +119,14 @@ else {
 
     <div class="container">
       <?php
+      $sql = "SELECT * FROM `notes`";
+      $result = mysqli_query($conn, $sql);
+      while($row = mysqli_fetch_assoc($result)){
+        // echo var_dump($row);
+        echo $row['sno'] . ". Title ". $row['title'] ." Desc is ". $row['description'];
+        echo "<br>";
+    }
+
 
 
 ?>
