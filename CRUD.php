@@ -1,3 +1,8 @@
+<?php
+// Connect to the database
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -96,6 +101,13 @@
         </div>
         <button type="submit" class="btn btn-primary">Add Note</button>
       </form>
+    </div>
+
+    <div class="container">
+      <?php
+
+
+?>
     </div>
 
     <!-- Optional JavaScript -->
