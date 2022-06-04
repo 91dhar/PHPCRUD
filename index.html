@@ -75,26 +75,26 @@
       <h2>Add a note</h2>
       <form>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Notes title</label>
+          <label for="title" class="form-label">Notes title</label>
           <input
-            type="email"
+            type="text"
             class="form-control"
-            id="exampleInputEmail1"
+            id="title"
+            name="title"
             aria-describedby="emailHelp"
           />
         </div>
 
         <div class="my-3">
-          <label for="exampleFormControlTextarea1" class="form-label"
-            >Notes description</label
-          >
+          <label for="desc" class="form-label">Notes description</label>
           <textarea
             class="form-control"
-            id="exampleFormControlTextarea1"
+            id="desc"
+            name="desc"
             rows="3"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Add Note</button>
       </form>
     </div>
 
