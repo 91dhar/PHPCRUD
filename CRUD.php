@@ -1,6 +1,8 @@
 <?php
 // INSERT INTO `notes` (`sno`, `title`, `description`, `timestamp`) VALUES (NULL, 'testttt', 'tessssrt vsvsadvfcsd sdfcs d sdv', current_timestamp());
 $insert = false;
+$update = false;
+$delete = false;
 // Connect to the database
 
 $servername = "localhost";
