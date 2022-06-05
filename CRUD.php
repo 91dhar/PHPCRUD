@@ -15,6 +15,23 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 if (!$conn){
     die("Sorry, we failed to connect: ". mysqli_connect_error());
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $title = $_POST["title"];
+  $description = $_POST["description"];
+  
+  // Sql query to be executed. 
+  $sql = "INSERT INTO `notes` (`title`, `description`) VALUES ('$title', '$description')";
+  $result = mysqli_query($conn, $sql); // The duplicate will still be executed because there's no Sr No in the query. Sr No is automatic incremental in the database
+  
+  // add a new trip to the trip table in the database
+  if($result){
+      echo "The record has been inserted successfully";
+  }
+  else{
+      echo "The record was not inserted successfully because of this error ---> ". mysqli_error($conn);
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +109,7 @@ if (!$conn){
 
     <div class="container my-4">
       <h2>Add a note</h2>
-      <form>
+      <form action="/PHPCRUD/CRUD.php" method="post">
         <div class="mb-3">
           <label for="title" class="form-label">Notes title</label>
           <input
@@ -108,8 +125,8 @@ if (!$conn){
           <label for="desc" class="form-label">Notes description</label>
           <textarea
             class="form-control"
-            id="desc"
-            name="desc"
+            id="description"
+            name="description"
             rows="3"
           ></textarea>
         </div>
