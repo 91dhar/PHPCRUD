@@ -118,18 +118,6 @@ if (!$conn){
     </div>
 
     <div class="container">
-      <?php
-      $sql = "SELECT * FROM `notes`";
-      $result = mysqli_query($conn, $sql);
-      while($row = mysqli_fetch_assoc($result)){
-        // echo var_dump($row);
-        echo $row['sno'] . ". Title ". $row['title'] ." Desc is ". $row['description'];
-        echo "<br>";
-    }
-
-
-
-?>
 
 <table class="table">
   <thead>
@@ -141,23 +129,18 @@ if (!$conn){
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+  <?php
+      $sql = "SELECT * FROM `notes`";
+      $result = mysqli_query($conn, $sql);
+      while($row = mysqli_fetch_assoc($result)){
+        echo "<tr>
+        <th scope='row'>". $row['sno'] . "</th>
+        <td>". $row['title'] . "</td>
+        <td>". $row['description'] . "</td>
+        <td> Actions </td>
+      </tr>";
+    }
+?>
   </tbody>
 </table>
     </div>
