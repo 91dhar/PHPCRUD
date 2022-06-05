@@ -13,25 +13,48 @@ $conn = mysqli_connect($servername, $username, $password, $database);
 
 // Die if connection was not successful
 if (!$conn){
-    die("Sorry, we failed to connect: ". mysqli_connect_error());
+  die("Sorry we failed to connect: ". mysqli_connect_error());
 }
 
+if(isset($_GET['delete'])){
+$sno = $_GET['delete'];
+$delete = true;
+$sql = "DELETE FROM `notes` WHERE `sno` = $sno";
+$result = mysqli_query($conn, $sql);
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if (isset( $_POST['snoEdit'])){
+// Update the record
+  $sno = $_POST["snoEdit"];
+  $title = $_POST["titleEdit"];
+  $description = $_POST["descriptionEdit"];
+
+// Sql query to be executed
+$sql = "UPDATE `notes` SET `title` = '$title' , `description` = '$description' WHERE `notes`.`sno` = $sno";
+$result = mysqli_query($conn, $sql);
+if($result){
+  $update = true;
+}
+else{
+  echo "We could not update the record successfully";
+}
+}
+else{
   $title = $_POST["title"];
   $description = $_POST["description"];
-  
-  // Sql query to be executed. 
-  $sql = "INSERT INTO `notes` (`title`, `description`) VALUES ('$title', '$description')";
-  $result = mysqli_query($conn, $sql); // The duplicate will still be executed because there's no Sr No in the query. Sr No is automatic incremental in the database
-  
-  // add a new trip to the trip table in the database
-  if($result){
-      //echo "The record has been inserted successfully";
-      $insert = true;
-  }
-  else{
-      echo "The record was not inserted successfully because of this error ---> ". mysqli_error($conn);
-  }
+
+// Sql query to be executed
+$sql = "INSERT INTO `notes` (`title`, `description`) VALUES ('$title', '$description')";
+$result = mysqli_query($conn, $sql);
+
+ 
+if($result){ 
+    $insert = true;
+}
+else{
+    echo "The record was not inserted successfully because of this error ---> ". mysqli_error($conn);
+} 
+}
 }
 ?>
 
@@ -69,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       </div>
       <div class="modal-body">
       <form action="/PHPCRUD/CRUD.php" method="POST">
+        <input type="hidden" name="snoEdit" id="snoEdit">
         <div class="mb-3">
           <label for="title" class="form-label">Notes title</label>
           <input
@@ -160,8 +184,6 @@ if($insert){
 }
 ?>
 
-
-
     <div class="container my-4">
       <h2>Add a note</h2>
       <form action="/PHPCRUD/CRUD.php" method="post">
@@ -211,7 +233,7 @@ if($insert){
         <th scope='row'>". $sno . "</th>
         <td>". $row['title'] . "</td>
         <td>". $row['description'] . "</td>
-        <td> <button class='edit btn btn-sm btn-primary'>Edit</button> • <a href='/del'>Delete</a> </td>
+        <td> <button class='edit btn btn-sm btn-primary' id=".$row['sno'].">Edit</button> <button class='delete btn btn-sm btn-primary' id=d".$row['sno'].">Delete</button> </td>
       </tr>";
     }
     
@@ -256,6 +278,8 @@ if($insert){
           console.log(title, description);
           titleEdit.value = title;
           descriptionEdit.value = description;
+          snoEdit.value = e.target.id;
+          console.log(e.target.id)
           $('#editModal').modal('toggle');
         })
       })
