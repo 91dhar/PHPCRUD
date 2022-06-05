@@ -46,14 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     />
 
     <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-      <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
-      <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
     <title>Project 1 - PHP CRUD</title>
   </head>
@@ -147,9 +142,9 @@ if($insert){
       </form>
     </div>
 
-    <div class="container">
+    <div class="container my-4">
 
-<table class="table">
+<table class="table" id="myTable">
   <thead>
     <tr>
       <th scope="col">S.No</th>
@@ -162,14 +157,18 @@ if($insert){
   <?php
       $sql = "SELECT * FROM `notes`";
       $result = mysqli_query($conn, $sql);
+      $sno = 0;
       while($row = mysqli_fetch_assoc($result)){
+        $sno = $sno + 1;
         echo "<tr>
-        <th scope='row'>". $row['sno'] . "</th>
+        <th scope='row'>". $sno . "</th>
         <td>". $row['title'] . "</td>
         <td>". $row['description'] . "</td>
-        <td> Actions </td>
+        <td> <a href='/edit'>Edit</a> <a href='/del'>Delete</a> </td>
       </tr>";
     }
+    
+    
 ?>
   </tbody>
 </table>
@@ -192,5 +191,12 @@ if($insert){
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#myTable').DataTable();
+
+    });
+  </script>
   </body>
 </html>
