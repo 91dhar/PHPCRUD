@@ -1,6 +1,6 @@
 <?php
 // INSERT INTO `notes` (`sno`, `title`, `description`, `timestamp`) VALUES (NULL, 'testttt', 'tessssrt vsvsadvfcsd sdfcs d sdv', current_timestamp());
-
+$insert = false;
 // Connect to the database
 
 $servername = "localhost";
@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   
   // add a new trip to the trip table in the database
   if($result){
-      echo "The record has been inserted successfully";
+      //echo "The record has been inserted successfully";
+      $insert = true;
   }
   else{
       echo "The record was not inserted successfully because of this error ---> ". mysqli_error($conn);
@@ -106,6 +107,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
       </div>
     </nav>
+    <?php
+if($insert){
+  echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+<strong>Success!</strong> Your note has been added successfully!
+<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+</div>";
+}
+?>
+
+
 
     <div class="container my-4">
       <h2>Add a note</h2>
