@@ -53,6 +53,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <title>Project 1 - PHP CRUD</title>
   </head>
   <body>
+
+  <!-- Edit modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+  Edit modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
     <nav class="navbar navbar-expand-lg bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">PHP CRUD</a>
@@ -164,7 +189,7 @@ if($insert){
         <th scope='row'>". $sno . "</th>
         <td>". $row['title'] . "</td>
         <td>". $row['description'] . "</td>
-        <td> <a href='/edit'>Edit</a> <a href='/del'>Delete</a> </td>
+        <td> <button class='edit btn btn-sm btn-primary'>Edit</button> • <a href='/del'>Delete</a> </td>
       </tr>";
     }
     
@@ -198,5 +223,13 @@ if($insert){
 
     });
   </script>
+  <script>
+      edits = document.getElementsByClassName('edit');
+      Array.from(edits).forEach((element)=>{
+        element.addEventListener("click", (e)=>{
+          console.log("edit", e);
+        })
+      })
+    </script>
   </body>
 </html>
