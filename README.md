@@ -1,4 +1,4 @@
-# CRUD app with PHP
+# CRUD app with PHP - (WIP)
 
 ## Notes app
 
@@ -12,4 +12,4 @@ A notes app (WIP) created with PHP, MySQL, JavaScript and Bootstrap. User can ad
 - [Bootstrap Navbar](https://getbootstrap.com/docs/5.2/components/navbar/)
 - [Bootstrap Modal](https://getbootstrap.com/docs/5.2/components/modal/)
 
-### This is still work in progress, however the foundation is in place.
+### WIP, the foundation structure has been built.
